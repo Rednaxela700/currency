@@ -3,21 +3,24 @@ import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-d
 import Navbar from './components/layout/Navbar';
 import Favourites from './components/pages/Favourites';
 import Main from './components/pages/Main';
+import CurrenciesState from './context/currencies/currenciesState';
 import { ROUTE_FAVOURITES, ROUTE_MAIN } from './routes';
 
 const App = () => (
-  <Router>
-    <Navbar />
-    <Switch>
-      <Route exact path={ROUTE_MAIN}>
-        <Main />
-      </Route>
-      <Route exact path={ROUTE_FAVOURITES}>
-        <Favourites />
-      </Route>
-      <Redirect to="/" />
-    </Switch>
-  </Router>
+  <CurrenciesState>
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route exact path={ROUTE_MAIN}>
+          <Main />
+        </Route>
+        <Route exact path={ROUTE_FAVOURITES}>
+          <Favourites />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    </Router>
+  </CurrenciesState>
 );
 
 export default App;
