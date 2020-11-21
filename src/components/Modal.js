@@ -15,7 +15,12 @@ export default function ModalWrapper({ submitAction }) {
   } = modalContext;
 
   return (
-    <Modal onClose={() => setModalOpen(false)} open={modalOpen}>
+    <Modal
+      onClose={() => {
+        setModalOpen(false);
+      }}
+      open={modalOpen}
+    >
       <Modal.Header>Are you sure?</Modal.Header>
       <Modal.Content>You&apos;re going to delete {modalMessage}.</Modal.Content>
       <Modal.Actions>
@@ -35,6 +40,7 @@ export default function ModalWrapper({ submitAction }) {
             setModalOpen(false);
             submitAction(modalData.code);
             setModalData(null);
+            setModalMessage('');
           }}
           negative
         />

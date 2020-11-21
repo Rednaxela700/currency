@@ -11,12 +11,13 @@ export default function Favourites() {
   const { favourites, setFavourites } = currenciesContext;
 
   const modalContext = useContext(ModalContext);
-  const { modalData, setModalData, setModalOpen, setModalMessage } = modalContext;
+  const { setModalData, setModalOpen, setModalMessage } = modalContext;
 
   const handleFavourite = (currencyCode) => {
+    const pickedCurrency = favourites.find((currency) => currency.code === currencyCode);
     setModalOpen(true);
-    setModalData(favourites.find((currency) => currency.code === currencyCode));
-    setModalMessage(modalData.currency);
+    setModalData(pickedCurrency);
+    setModalMessage(pickedCurrency.currency);
   };
 
   const removeFavourite = (currencyCode) => {
