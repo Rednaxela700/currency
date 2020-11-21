@@ -4,6 +4,7 @@ import { FETCH_RATES } from '../../api';
 import useDataFetching from '../../hooks/useDataFetch';
 import CurrencyItem from '../CurrencyItem';
 import CurrenciesContext from '../../context/currencies/currenciesContext';
+import Loader from '../Loader';
 
 export const mainStyles = {
   container: { padding: '5em 0em' },
@@ -20,7 +21,7 @@ export default function Main() {
     }
   }),
     [];
-  if (loading) return null;
+  if (loading) return <Loader />;
 
   const { rates } = currencies;
   return (
