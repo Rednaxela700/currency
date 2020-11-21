@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import ModalContext from '../context/modal/modalContext';
 
-export default function ModalWrapper({ modalOpen, setModalOpen }) {
+export default function ModalWrapper({}) {
+  const modalContext = useContext(ModalContext);
+  const { modalOpen, setModalOpen } = modalContext;
+
   return (
     <Modal
       onClose={() => setModalOpen(false)}

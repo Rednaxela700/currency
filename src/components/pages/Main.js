@@ -12,7 +12,6 @@ export const mainStyles = {
   header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
 };
 export default function Main() {
-  const [modalOpen, setModalOpen] = useState(true);
   const currenciesContext = useContext(CurrenciesContext);
   const { setCurrencies, currencies } = currenciesContext;
 
@@ -36,7 +35,7 @@ export default function Main() {
           ))}
         </Grid.Column>
       </Container>
-      <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      <Modal />
     </Fragment>
   );
 }
