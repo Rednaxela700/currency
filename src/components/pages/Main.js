@@ -12,6 +12,7 @@ export const mainStyles = {
   header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
 };
 export default function Main() {
+  const [favourites, setFavourites] = useState([]);
   const currenciesContext = useContext(CurrenciesContext);
   const { setCurrencies, currencies } = currenciesContext;
 
@@ -23,7 +24,11 @@ export default function Main() {
   }),
     [];
   if (loading) return <Loader />;
-
+  const addFavourite = (currencyCode) => {
+    const currencyObj = rates.find((curr) => curr.code === currencyCode);
+    const newFavourites = [...favourites, { ...currencyObj, effectiveDate }];
+    setFavourites(newFavourites);
+  };
   const { rates, effectiveDate } = currencies;
   return (
     <Fragment>
@@ -31,7 +36,7 @@ export default function Main() {
         <Header as="h2">Currencies from: {effectiveDate}</Header>
         <Grid.Column>
           {rates.map((currency) => (
-            <CurrencyItem key={currency.code} data={currency} />
+            <CurrencyItem key={currency.code} data={currency} handleSubmit={addFavourite} />
           ))}
         </Grid.Column>
       </Container>

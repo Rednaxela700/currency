@@ -9,13 +9,20 @@ const styles = {
   btn: { minWidth: '93px' },
 };
 export const firstLetterToUppercase = (string) => string.charAt(0).toUpperCase() + string.slice(1);
-export default function CurrencyItem({ data: { currency, code, ask, bid } }) {
+
+export default function CurrencyItem({ data: { currency, code, ask, bid }, handleSubmit }) {
   const currencyName = firstLetterToUppercase(currency);
   const sellPrice = ask.toFixed(2);
   const buyPrice = bid.toFixed(2);
   return (
     <Segment attached>
-      <div style={styles.container}>
+      <form
+        style={styles.container}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(code);
+        }}
+      >
         <p style={styles.currencyName}>
           {code} - {currencyName}
         </p>
@@ -24,14 +31,15 @@ export default function CurrencyItem({ data: { currency, code, ask, bid } }) {
           {' / '}
           <span>{buyPrice}zł</span>
         </div>
-        <Button style={styles.btn} positive>
+        <Button type="submit" style={styles.btn} positive>
           Add
         </Button>
-      </div>
+      </form>
     </Segment>
   );
 }
 
 CurrencyItem.propTypes = {
   data: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
