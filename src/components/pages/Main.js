@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Header, Grid, Segment } from 'semantic-ui-react';
 import { FETCH_RATES } from '../../api';
 import useDataFetching from '../../hooks/useDataFetch';
+import CurrencyItem from '../CurrencyItem';
 
 export const mainStyles = {
   container: { padding: '5em 0em' },
@@ -20,7 +21,9 @@ export default function Main() {
     <Container as="section" style={mainStyles.container}>
       <Header as="h1">Currencies:</Header>
       <Grid.Column>
-        <Segment attached>currency</Segment>
+        {data[0].rates.map((currency) => (
+          <CurrencyItem key={currency.code} />
+        ))}
       </Grid.Column>
     </Container>
   );
