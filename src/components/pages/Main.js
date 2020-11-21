@@ -28,6 +28,19 @@ export default function Main() {
     const newFavourites = [...favourites, { ...currencyObj, effectiveDate }];
     setFavourites(newFavourites);
   };
+  const removeFavourite = (currency) => {
+    const currencyCode = currency.code;
+    const updatedFavourites = favourites.filter((removedCurr) => removedCurr.code !== currencyCode);
+    setFavourites(updatedFavourites);
+  };
+  const handleFavourite = (code) => {
+    const inFavourites = favourites.find((favedCurrency) => favedCurrency.code === code);
+    if (inFavourites) {
+      removeFavourite(inFavourites);
+    } else {
+      addFavourite(code);
+    }
+  };
   const { rates, effectiveDate } = currencies;
   return (
     <Fragment>
@@ -35,7 +48,7 @@ export default function Main() {
         <Header as="h2">Currencies from: {effectiveDate}</Header>
         <Grid.Column>
           {rates.map((currency) => (
-            <CurrencyItem key={currency.code} data={currency} handleSubmit={addFavourite} />
+            <CurrencyItem key={currency.code} data={currency} handleSubmit={handleFavourite} />
           ))}
         </Grid.Column>
       </Container>
