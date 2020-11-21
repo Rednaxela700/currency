@@ -24,7 +24,9 @@ export default function CurrencyItem({ data: { currency, code, ask, bid } }) {
           {' / '}
           <span>{buyPrice}zł</span>
         </div>
-        <Button positive>Add</Button>
+        <Button style={styles.btn} positive>
+          Add
+        </Button>
       </div>
     </Segment>
   );
