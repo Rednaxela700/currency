@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Button, Modal } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
 import ModalContext from '../context/modal/modalContext';
 
 export default function ModalWrapper({}) {
@@ -8,12 +7,7 @@ export default function ModalWrapper({}) {
   const { modalOpen, setModalOpen } = modalContext;
 
   return (
-    <Modal
-      onClose={() => setModalOpen(false)}
-      // onOpen={() => setModalOpen(true)}
-      open={modalOpen}
-      // trigger={<Button>Show Modal</Button>}
-    >
+    <Modal onClose={() => setModalOpen(false)} open={modalOpen}>
       <Modal.Header>Are you sure?</Modal.Header>
       <Modal.Content>You&apos;re going to delete {'something'}.</Modal.Content>
       <Modal.Actions>
@@ -38,8 +32,3 @@ export default function ModalWrapper({}) {
     </Modal>
   );
 }
-
-ModalWrapper.propTypes = {
-  modalOpen: PropTypes.bool.isRequired,
-  setModalOpen: PropTypes.func.isRequired,
-};

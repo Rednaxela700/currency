@@ -12,9 +12,8 @@ export const mainStyles = {
   header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
 };
 export default function Main() {
-  const [favourites, setFavourites] = useState([]);
   const currenciesContext = useContext(CurrenciesContext);
-  const { setCurrencies, currencies } = currenciesContext;
+  const { setCurrencies, currencies, favourites, setFavourites } = currenciesContext;
 
   const { loading, results } = useDataFetching(`${process.env.REACT_APP_API_KEY}${FETCH_RATES}`);
   useEffect(() => {
