@@ -5,13 +5,13 @@ import { ROUTE_FAVOURITES, ROUTE_MAIN } from '../../routes';
 
 export default function Navbar() {
   const styles = {
-    header: { padding: '1rem' },
+    header: { padding: '1rem', marginBottom: '0', color: '#fff', backgroundColor: '#272727' },
     nav: { marginTop: '0' },
   };
   return (
     <Fragment>
-      <Header as="h1" styles={styles.header}>
-        <Icon name="dollar sign" />
+      <Header as="h1" style={styles.header}>
+        <Icon name="dollar sign" inverted />
         Currency App
       </Header>
       <Menu as="nav" attached="top" tabular style={styles.nav}>
