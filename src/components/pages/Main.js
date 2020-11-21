@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, Fragment, useState } from 'react';
+import React, { useContext, useEffect, Fragment } from 'react';
 import { Container, Header, Grid } from 'semantic-ui-react';
 import { FETCH_RATES } from '../../api';
 import useDataFetching from '../../hooks/useDataFetch';
@@ -16,7 +16,7 @@ export default function Main() {
   const currenciesContext = useContext(CurrenciesContext);
   const { setCurrencies, currencies, favourites, setFavourites } = currenciesContext;
   const modalContext = useContext(ModalContext);
-  const { setModalOpen, setModalData, modalData, setModalMessage } = modalContext;
+  const { setModalOpen, setModalData, setModalMessage } = modalContext;
 
   const { loading, results } = useDataFetching(`${process.env.REACT_APP_API_KEY}${FETCH_RATES}`);
   useEffect(() => {
