@@ -1,5 +1,6 @@
 import React from 'react';
 import { Segment, Button } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 const styles = {
   container: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
@@ -7,18 +8,28 @@ const styles = {
   price: { minWidth: '100px' },
   btn: { minWidth: '93px' },
 };
-export default function CurrencyItem() {
+export const firstLetterToUppercase = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+export default function CurrencyItem({ data: { currency, code, ask, bid } }) {
+  const currencyName = firstLetterToUppercase(currency);
+  const sellPrice = ask.toFixed(2);
+  const buyPrice = bid.toFixed(2);
   return (
     <Segment attached>
       <div style={styles.container}>
-        <p style={styles.currencyName}>Currency</p>
+        <p style={styles.currencyName}>
+          {code} - {currencyName}
+        </p>
         <div style={styles.price}>
-          <span>100zł</span>
+          <span>{sellPrice}zł</span>
           {' / '}
-          <span>3000zł</span>
+          <span>{buyPrice}zł</span>
         </div>
         <Button positive>Add</Button>
       </div>
     </Segment>
   );
 }
+
+CurrencyItem.propTypes = {
+  data: PropTypes.object.isRequired,
+};

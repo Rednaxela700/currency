@@ -23,13 +23,13 @@ export default function Main() {
     [];
   if (loading) return <Loader />;
 
-  const { rates } = currencies;
+  const { rates, effectiveDate } = currencies;
   return (
     <Container as="section" style={mainStyles.container}>
-      <Header as="h1">Currencies:</Header>
+      <Header as="h2">Currencies from: {effectiveDate}</Header>
       <Grid.Column>
         {rates.map((currency) => (
-          <CurrencyItem key={currency.code} />
+          <CurrencyItem key={currency.code} data={currency} />
         ))}
       </Grid.Column>
     </Container>
