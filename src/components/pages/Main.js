@@ -27,21 +27,34 @@ export default function Main() {
   const { setModalOpen, setModalData, setModalMessage } = modalContext;
 
   const { loading, results } = useDataFetching(`${process.env.REACT_APP_API_KEY}${FETCH_RATES}`);
+
   useEffect(() => {
     if (!currencies) {
       setCurrencies(results[0]);
+      loadFavourites();
     }
   }),
     [];
+
+  const loadFavourites = () => {
+    const loaded = JSON.parse(localStorage.getItem('favouriteCurrencies')) || [];
+    setFavourites(loaded);
+  };
+
   if (loading) return <Loader />;
+
+  const saveFavourites = (faved) => {
+    setFavourites(faved);
+    localStorage.setItem('favouriteCurrencies', JSON.stringify(faved));
+  };
   const addFavourite = (currencyCode) => {
     const currencyObj = rates.find((curr) => curr.code === currencyCode);
     const newFavourites = [...favourites, { ...currencyObj, effectiveDate }];
-    setFavourites(newFavourites);
+    saveFavourites(newFavourites);
   };
   const removeFavourite = (currencyCode) => {
     const updatedFavourites = favourites.filter((removedCurr) => removedCurr.code !== currencyCode);
-    setFavourites(updatedFavourites);
+    saveFavourites(updatedFavourites);
   };
   const handleFavourite = (code) => {
     const inFavourites = favourites.find((favedCurrency) => favedCurrency.code === code);
