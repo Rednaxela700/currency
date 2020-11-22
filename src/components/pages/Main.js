@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, Fragment } from 'react';
-import { Container, Header, Grid, Button } from 'semantic-ui-react';
+import { Container, Header, Grid } from 'semantic-ui-react';
 import { FETCH_RATES } from '../../api';
 import useDataFetching from '../../hooks/useDataFetch';
 import CurrencyItem from '../CurrencyItem';
@@ -7,6 +7,7 @@ import CurrenciesContext from '../../context/currencies/currenciesContext';
 import ModalContext from '../../context/modal/modalContext';
 import Loader from '../Loader';
 import Modal from '../Modal';
+import ClearBtn from '../ClearBtn';
 
 export const mainStyles = {
   container: { padding: '5em 0em' },
@@ -14,6 +15,7 @@ export const mainStyles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    minHeight: '40px',
   },
   heading: { flexBasis: '33%', marginBottom: '0' },
   prices: { flexBasis: '33%', textAlign: 'center', marginBottom: '0' },
@@ -24,9 +26,9 @@ export default function Main() {
   const currenciesContext = useContext(CurrenciesContext);
   const { setCurrencies, currencies, favourites, setFavourites } = currenciesContext;
   const modalContext = useContext(ModalContext);
-  const { setModalOpen, setModalData, setModalMessage } = modalContext;
+  const { setModalOpen, modalData, setModalData, setModalMessage } = modalContext;
 
-  const { loading, results } = useDataFetching(`${process.env.REACT_APP_API_KEY}${FETCH_RATES}`);
+  const { results } = useDataFetching(`${process.env.REACT_APP_API_KEY}${FETCH_RATES}`);
 
   useEffect(() => {
     if (!currencies) {
@@ -41,7 +43,7 @@ export default function Main() {
     setFavourites(loaded);
   };
 
-  if (loading) return <Loader />;
+  if (!currencies) return <Loader />;
 
   const saveFavourites = (faved) => {
     setFavourites(faved);
@@ -52,8 +54,10 @@ export default function Main() {
     const newFavourites = [...favourites, { ...currencyObj, effectiveDate }];
     saveFavourites(newFavourites);
   };
-  const removeFavourite = (currencyCode) => {
-    const updatedFavourites = favourites.filter((removedCurr) => removedCurr.code !== currencyCode);
+  const removeFavourite = (removedCurrency) => {
+    const updatedFavourites = favourites.filter(
+      (removedCurr) => removedCurr.code !== removedCurrency.code,
+    );
     saveFavourites(updatedFavourites);
   };
   const handleFavourite = (code) => {
@@ -76,7 +80,7 @@ export default function Main() {
           </Header>
           <p style={mainStyles.prices}>Buy/Sell</p>
           <div style={mainStyles.btnContainer}>
-            <Button content="clear all" />
+            <ClearBtn />
           </div>
         </header>
         <Grid.Column>
@@ -85,7 +89,7 @@ export default function Main() {
           ))}
         </Grid.Column>
       </Container>
-      <Modal submitAction={removeFavourite} />
+      {modalData && <Modal submitAction={removeFavourite} />}
     </Fragment>
   );
 }

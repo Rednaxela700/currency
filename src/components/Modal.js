@@ -13,7 +13,7 @@ export default function ModalWrapper({ submitAction }) {
     modalMessage,
     setModalMessage,
   } = modalContext;
-
+  const currencyCode = modalData ? modalData.code : null;
   return (
     <Modal
       onClose={() => {
@@ -38,7 +38,7 @@ export default function ModalWrapper({ submitAction }) {
           icon="checkmark"
           onClick={() => {
             setModalOpen(false);
-            submitAction(modalData.code);
+            submitAction(currencyCode);
             setModalData(null);
             setModalMessage('');
           }}
