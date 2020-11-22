@@ -27,7 +27,9 @@ In this project I used following:
 1. Bootstrap this project using git clone or download it right from here
 2. Make sure you have node development enviroment installed. (Mine is **14.10.0**)
 3. Install project dependencies with yarn using `yarn install`
-4. When installation completes hit `yarn run`
-5. Enjoy or post me an issue ✍️
+4. When installation completes create `.env` file in project root and paste following
+   `REACT_APP_API_KEY=http://api.nbp.pl/api`
+5. Hit `yarn run`
+6. Enjoy or post me an issue ✍️
 
 Don't hesitate to contact me if you need any further information.
