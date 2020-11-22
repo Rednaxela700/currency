@@ -48,8 +48,16 @@ export default function Favourites() {
     <Fragment>
       <Container style={mainStyles.container}>
         {favourites.length == 0 ? <HeaderWithOutFavourites /> : <HeaderWithFavourites />}
-        {favourites.map((currency) => (
-          <CurrencyItem key={currency.currency} data={currency} handleSubmit={handleFavourite} />
+        {favourites.map((currency, index, currenciesArr) => (
+          <Fragment key={`${index}${currency}`}>
+            {index === 0 ? <Header as="h3" content={currency.effectiveDate} /> : ''}
+            {index > 0 && currenciesArr[index - 1].effectiveDate !== currency.effectiveDate ? (
+              <Header as="h3">{currency.effectiveDate}</Header>
+            ) : (
+              ''
+            )}
+            <CurrencyItem key={currency.currency} data={currency} handleSubmit={handleFavourite} />
+          </Fragment>
         ))}
       </Container>
       {modalData && <Modal submitAction={removeFavourite} />}
