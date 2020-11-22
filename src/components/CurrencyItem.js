@@ -14,16 +14,16 @@ export default function CurrencyItem({ data: { currency, code, ask, bid }, handl
   const sellPrice = ask.toFixed(2);
   const buyPrice = bid.toFixed(2);
 
-  const CurrentBtn = () => {
+  const CurrentBtn = (props) => {
     if (favourites && favourites.find((favedCurrency) => favedCurrency.code === code)) {
       return (
-        <Button type="submit" negative>
+        <Button {...props} type="submit" negative>
           Remove
         </Button>
       );
     }
     return (
-      <Button type="submit" positive>
+      <Button {...props} type="submit" positive>
         Add
       </Button>
     );
@@ -46,8 +46,8 @@ export default function CurrencyItem({ data: { currency, code, ask, bid }, handl
           {' / '}
           <span>{buyPrice}zł</span>
         </div>
-        <div style={mainStyles.btn}>
-          <CurrentBtn />
+        <div style={mainStyles.btnContainer}>
+          <CurrentBtn style={mainStyles.btn} />
         </div>
       </form>
     </Segment>

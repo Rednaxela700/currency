@@ -17,7 +17,8 @@ export const mainStyles = {
   },
   heading: { flexBasis: '33%', marginBottom: '0' },
   prices: { flexBasis: '33%', textAlign: 'center', marginBottom: '0' },
-  btn: { flexBasis: '33%', display: 'flex', justifyContent: 'flex-end' },
+  btnContainer: { flexBasis: '33%', display: 'flex', justifyContent: 'flex-end' },
+  btn: { minWidth: '6.5rem' },
 };
 export default function Main() {
   const currenciesContext = useContext(CurrenciesContext);
@@ -61,7 +62,7 @@ export default function Main() {
             Currencies from: {effectiveDate}
           </Header>
           <p style={mainStyles.prices}>Buy/Sell</p>
-          <div style={mainStyles.btn}>
+          <div style={mainStyles.btnContainer}>
             <Button content="clear all" />
           </div>
         </header>
