@@ -8,7 +8,7 @@ This is currency app. It connects to nbp API and gets you possibility to save yo
 
 Right now favourites are being saved to localStorage. I'm going to integrate it with db and add user authentication in a long shot. For now it took me 2 days, but I was thinking on it another 3.
 
-<img src="/Users/alexander/Library/Application Support/typora-user-images/Screenshot 2020-11-22 at 13.56.03.png" alt="Picture of an app" style="zoom:25%;" />
+<img src="https://i.ibb.co/60vMwpy/readme-Img.png" alt="Picture of an app" style="zoom:100%;" />
 
 ## Tools & tech 🔩
 
