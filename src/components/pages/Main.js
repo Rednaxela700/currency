@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, Fragment } from 'react';
-import { Container, Header, Grid } from 'semantic-ui-react';
+import { Container, Header, Grid, Button } from 'semantic-ui-react';
 import { FETCH_RATES } from '../../api';
 import useDataFetching from '../../hooks/useDataFetch';
 import CurrencyItem from '../CurrencyItem';
@@ -10,7 +10,14 @@ import Modal from '../Modal';
 
 export const mainStyles = {
   container: { padding: '5em 0em' },
-  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  heading: { flexBasis: '33%', marginBottom: '0' },
+  prices: { flexBasis: '33%', textAlign: 'center', marginBottom: '0' },
+  btn: { flexBasis: '33%', display: 'flex', justifyContent: 'flex-end' },
 };
 export default function Main() {
   const currenciesContext = useContext(CurrenciesContext);
@@ -49,7 +56,15 @@ export default function Main() {
   return (
     <Fragment>
       <Container as="section" style={mainStyles.container}>
-        <Header as="h2">Currencies from: {effectiveDate}</Header>
+        <header style={{ ...mainStyles.header, marginBottom: '1em' }}>
+          <Header as="h2" style={mainStyles.heading}>
+            Currencies from: {effectiveDate}
+          </Header>
+          <p style={mainStyles.prices}>Buy/Sell</p>
+          <div style={mainStyles.btn}>
+            <Button content="clear all" />
+          </div>
+        </header>
         <Grid.Column>
           {rates.map((currency) => (
             <CurrencyItem key={currency.code} data={currency} handleSubmit={handleFavourite} />

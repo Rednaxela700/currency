@@ -2,13 +2,8 @@ import React, { useContext } from 'react';
 import { Segment, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import CurrenciesContext from '../context/currencies/currenciesContext';
+import { mainStyles } from './pages/Main';
 
-const styles = {
-  container: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
-  currencyName: { minWidth: '25%', margin: '0' },
-  price: { minWidth: '100px' },
-  btn: { minWidth: '93px' },
-};
 export const firstLetterToUppercase = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
 export default function CurrencyItem({ data: { currency, code, ask, bid }, handleSubmit }) {
@@ -22,13 +17,13 @@ export default function CurrencyItem({ data: { currency, code, ask, bid }, handl
   const CurrentBtn = () => {
     if (favourites && favourites.find((favedCurrency) => favedCurrency.code === code)) {
       return (
-        <Button style={styles.btn} type="submit" negative>
+        <Button type="submit" negative>
           Remove
         </Button>
       );
     }
     return (
-      <Button style={styles.btn} type="submit" positive>
+      <Button type="submit" positive>
         Add
       </Button>
     );
@@ -37,21 +32,23 @@ export default function CurrencyItem({ data: { currency, code, ask, bid }, handl
   return (
     <Segment attached>
       <form
-        style={styles.container}
+        style={mainStyles.header}
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit(code);
         }}
       >
-        <p style={styles.currencyName}>
+        <p style={mainStyles.heading}>
           {code} - {currencyName}
         </p>
-        <div style={styles.price}>
+        <div style={mainStyles.prices}>
           <span>{sellPrice}zł</span>
           {' / '}
           <span>{buyPrice}zł</span>
         </div>
-        <CurrentBtn />
+        <div style={mainStyles.btn}>
+          <CurrentBtn />
+        </div>
       </form>
     </Segment>
   );
