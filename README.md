@@ -32,4 +32,8 @@ In this project I used following:
 5. Hit `yarn run`
 6. Enjoy or post me an issue ✍️
 
+## Schema you should know before further development 👀
+
+<img src="https://i.postimg.cc/CKQW45rs/SCHEMA.png" alt="Picture of app logic schema" style="zoom:100%;" />
+
 Don't hesitate to contact me if you need any further information.
