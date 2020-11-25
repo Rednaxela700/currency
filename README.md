@@ -4,7 +4,7 @@ Below you can find some details about this project and installation instructions
 
 ## Overview:
 
-This is currency app. It connects to nbp API and gets you possibility to save your rates you're intrested in to favourites.
+This is currency app. It connects to nbp API and gets you possibility to save rates you're intrested in as favourites.
 
 Right now favourites are being saved to localStorage. I'm going to integrate it with db and add user authentication in a long shot. For now it took me 2 days, but I was thinking on it another 3.
 
